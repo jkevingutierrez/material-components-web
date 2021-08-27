@@ -551,3 +551,9 @@ $_ripple-theme: (
 
   @return map.get($opacity-map, $state);
 }
+
+@mixin states-background-selector($ripple-target) {
+  #{$ripple-target}::before {
+    @content;
+  }
+}

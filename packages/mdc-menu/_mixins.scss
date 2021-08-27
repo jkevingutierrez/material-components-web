@@ -26,6 +26,7 @@
 @use 'sass:math';
 @use '@material/elevation/mixins' as elevation-mixins;
 @use '@material/feature-targeting/feature-targeting';
+@use '@material/ripple/ripple-theme';
 @use '@material/rtl/rtl';
 @use '@material/list/mixins' as list-mixins;
 @use '@material/list/variables' as list-variables;
@@ -132,6 +133,25 @@
   .mdc-menu-item--selected .mdc-menu__selection-group-icon {
     @include feature-targeting.targets($feat-structure) {
       display: inline;
+    }
+  }
+
+  :not(.mdc-deprecated-list-item--disabled).mdc-deprecated-list-item {
+    &.mdc-menu-item--submenu-open {
+      @include ripple-theme.states-background-selector(
+        list-variables.$deprecated-ripple-target
+      ) {
+        @include feature-targeting.targets($feat-color) {
+          opacity: ripple-theme.states-opacity(variables.$ink-color, hover);
+        }
+      }
+      @include ripple-theme.states-background-selector(
+        list-variables.$deprecated-temporary-ripple-target
+      ) {
+        @include feature-targeting.targets($feat-color) {
+          opacity: ripple-theme.states-opacity(variables.$ink-color, hover);
+        }
+      }
     }
   }
 }
